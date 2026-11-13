@@ -1,0 +1,114 @@
+============================================================
+Experiment 1a: do all 5 versions give the same answer?
+============================================================
+  Part A example, V1 Schoolbook    : [3, 19, 27, 24, 24, 7, 6]
+  Part A example, V2 4-way split   : [3, 19, 27, 24, 24, 7, 6]
+  Part A example, V3 Karatsuba     : [3, 19, 27, 24, 24, 7, 6]
+  Part A example, V4 Recursive FFT : [3, 19, 27, 24, 24, 7, 6]
+  Part A example, V5 Iterative FFT : [3, 19, 27, 24, 24, 7, 6]
+  n =     8, V1 Schoolbook    : OK
+  n =     8, V2 4-way split   : OK
+  n =     8, V3 Karatsuba     : OK
+  n =     8, V4 Recursive FFT : OK
+  n =     8, V5 Iterative FFT : OK
+  n =    64, V1 Schoolbook    : OK
+  n =    64, V2 4-way split   : OK
+  n =    64, V3 Karatsuba     : OK
+  n =    64, V4 Recursive FFT : OK
+  n =    64, V5 Iterative FFT : OK
+  n =   512, V1 Schoolbook    : OK
+  n =   512, V2 4-way split   : OK
+  n =   512, V3 Karatsuba     : OK
+  n =   512, V4 Recursive FFT : OK
+  n =   512, V5 Iterative FFT : OK
+  n =  2048, V1 Schoolbook    : OK
+  n =  2048, V2 4-way split   : OK
+  n =  2048, V3 Karatsuba     : OK
+  n =  2048, V4 Recursive FFT : OK
+  n =  2048, V5 Iterative FFT : OK
+  All versions agree.
+
+============================================================
+Experiment 1b: when does float64 FFT rounding break? (n = 4096)
+============================================================
+  coeffs up to 10^4, V4 Recursive FFT : largest |c_k| = 7.88e+09, wrong coefficients =     0 of 8191, max error = 0
+  coeffs up to 10^4, V5 Iterative FFT : largest |c_k| = 7.88e+09, wrong coefficients =     0 of 8191, max error = 0
+  coeffs up to 10^5, V4 Recursive FFT : largest |c_k| = 6.54e+11, wrong coefficients =     0 of 8191, max error = 0
+  coeffs up to 10^5, V5 Iterative FFT : largest |c_k| = 6.54e+11, wrong coefficients =     0 of 8191, max error = 0
+  coeffs up to 10^6, V4 Recursive FFT : largest |c_k| = 7.26e+13, wrong coefficients =     0 of 8191, max error = 0
+  coeffs up to 10^6, V5 Iterative FFT : largest |c_k| = 7.26e+13, wrong coefficients =     0 of 8191, max error = 0
+  coeffs up to 10^7, V4 Recursive FFT : largest |c_k| = 7.03e+15, wrong coefficients =  3957 of 8191, max error = 3
+  coeffs up to 10^7, V5 Iterative FFT : largest |c_k| = 7.03e+15, wrong coefficients =  3957 of 8191, max error = 3
+  coeffs up to 10^8, V4 Recursive FFT : largest |c_k| = 8.00e+17, wrong coefficients =  8138 of 8191, max error = 246
+  coeffs up to 10^8, V5 Iterative FFT : largest |c_k| = 8.00e+17, wrong coefficients =  8138 of 8191, max error = 246
+  For reference: 2^53 = 9.01e+15 (largest exactly stored integer in float64)
+
+============================================================
+Experiment 2: runtime and peak memory for n = 2^4 ... 2^15
+============================================================
+  n =     16, V1 Schoolbook    :    0.0000 s
+  n =     16, V2 4-way split   :    0.0001 s
+  n =     16, V3 Karatsuba     :    0.0000 s
+  n =     16, V4 Recursive FFT :    0.0001 s
+  n =     16, V5 Iterative FFT :    0.0001 s
+  n =     32, V1 Schoolbook    :    0.0001 s
+  n =     32, V2 4-way split   :    0.0004 s
+  n =     32, V3 Karatsuba     :    0.0001 s
+  n =     32, V4 Recursive FFT :    0.0003 s
+  n =     32, V5 Iterative FFT :    0.0002 s
+  n =     64, V1 Schoolbook    :    0.0003 s
+  n =     64, V2 4-way split   :    0.0016 s
+  n =     64, V3 Karatsuba     :    0.0002 s
+  n =     64, V4 Recursive FFT :    0.0006 s
+  n =     64, V5 Iterative FFT :    0.0006 s
+  n =    128, V1 Schoolbook    :    0.0018 s
+  n =    128, V2 4-way split   :    0.0057 s
+  n =    128, V3 Karatsuba     :    0.0006 s
+  n =    128, V4 Recursive FFT :    0.0011 s
+  n =    128, V5 Iterative FFT :    0.0009 s
+  n =    256, V1 Schoolbook    :    0.0046 s
+  n =    256, V2 4-way split   :    0.0238 s
+  n =    256, V3 Karatsuba     :    0.0020 s
+  n =    256, V4 Recursive FFT :    0.0028 s
+  n =    256, V5 Iterative FFT :    0.0027 s
+  n =    512, V1 Schoolbook    :    0.0234 s
+  n =    512, V2 4-way split   :    0.0968 s
+  n =    512, V3 Karatsuba     :    0.0060 s
+  n =    512, V4 Recursive FFT :    0.0056 s
+  n =    512, V5 Iterative FFT :    0.0052 s
+  n =   1024, V1 Schoolbook    :    0.1035 s
+  n =   1024, V2 4-way split   :    0.3870 s
+  n =   1024, V3 Karatsuba     :    0.0208 s
+  n =   1024, V4 Recursive FFT :    0.0122 s
+  n =   1024, V5 Iterative FFT :    0.0111 s
+  n =   2048, V1 Schoolbook    :    0.4161 s
+  n =   2048, V2 4-way split   :    1.7195 s
+  n =   2048, V3 Karatsuba     :    0.0576 s
+  n =   2048, V4 Recursive FFT :    0.0263 s
+  n =   2048, V5 Iterative FFT :    0.0238 s
+  n =   4096, V1 Schoolbook    :    1.6245 s
+  n =   4096, V2 4-way split   :    7.1160 s
+  n =   4096, V3 Karatsuba     :    0.1795 s
+  n =   4096, V4 Recursive FFT :    0.0551 s
+  n =   4096, V5 Iterative FFT :    0.0555 s
+  n =   8192, V1 Schoolbook    :    6.6973 s
+  n =   8192, V2 4-way split   :   27.0155 s
+      (V2 4-way split is now too slow; skipping larger n)
+  n =   8192, V3 Karatsuba     :    0.5578 s
+  n =   8192, V4 Recursive FFT :    0.1197 s
+  n =   8192, V5 Iterative FFT :    0.1172 s
+  n =  16384, V1 Schoolbook    :   28.0138 s
+      (V1 Schoolbook is now too slow; skipping larger n)
+  n =  16384, V3 Karatsuba     :    1.7687 s
+  n =  16384, V4 Recursive FFT :    0.2911 s
+  n =  16384, V5 Iterative FFT :    0.2526 s
+  n =  32768, V3 Karatsuba     :    5.0993 s
+  n =  32768, V4 Recursive FFT :    0.5652 s
+  n =  32768, V5 Iterative FFT :    0.6015 s
+
+Crossover results:
+  Karatsuba beats Schoolbook from n = 32
+  Iterative FFT beats Karatsuba from n = 512
+
+  Saved runtime_plot.png
+  Saved memory_plot.png
